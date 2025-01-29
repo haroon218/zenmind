@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -7,13 +7,16 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
 import { AppFloatingConfigurator } from '../../layout/component/app.floatingconfigurator';
+import { SharedService } from '../../Shared/services/shared.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, AppFloatingConfigurator],
+    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RouterModule, RippleModule,ReactiveFormsModule],
     template: `
-        <app-floating-configurator />
+        <!-- <app-floating-configurator /> -->
         <div class="bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
             <div class="flex flex-col items-center justify-center">
                 <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
@@ -41,20 +44,43 @@ import { AppFloatingConfigurator } from '../../layout/component/app.floatingconf
                         </div>
 
                         <div>
-                            <label for="email1" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Email</label>
-                            <input pInputText id="email1" type="text" placeholder="Email address" class="w-full md:w-[30rem] mb-8" [(ngModel)]="email" />
-
-                            <label for="password1" class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2">Password</label>
-                            <p-password id="password1" [(ngModel)]="password" placeholder="Password" [toggleMask]="true" styleClass="mb-4" [fluid]="true" [feedback]="false"></p-password>
-
-                            <div class="flex items-center justify-between mt-2 mb-8 gap-8">
-                                <div class="flex items-center">
-                                    <p-checkbox [(ngModel)]="checked" id="rememberme1" binary class="mr-2"></p-checkbox>
-                                    <label for="rememberme1">Remember me</label>
-                                </div>
-                                <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary">Forgot password?</span>
+                        <form [formGroup]="loginForm" (submit)="getFormData(loginForm)">
+                         <div class="flex" style="flex-direction: column;">        
+                            <label for="email" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Email</label>
+                            <input pInputText id="email" type="email" formControlName="email" placeholder="Enter Email" class="w-full md:w-[30rem] mb-1"/>
+                            @if(loginForm.get('email')?.touched  &&
+                              loginForm.get('email')?.hasError('required')){
+                                <small style="color: red;">
+                                  Email is required
+                               </small>
+                            } 
+                            @if(loginForm.get('email')?.touched  &&
+                              loginForm.get('email')?.hasError('email')){
+                                <small style="color: red;">
+                                  Email is Invalid
+                               </small>
+                            } 
+                         </div>  
+                         <div class="flex mt-2" style="flex-direction: column;">
+                            <label for="pass" class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2">Password</label>
+                            <p-password id="pass" formControlName="pass" placeholder="Enter Password" 
+                            [toggleMask]="true" styleClass="mb-1" [fluid]="true" [feedback]="false"></p-password>
+                            @if(loginForm.get('pass')?.touched  &&
+                              loginForm.get('pass')?.hasError('required')){
+                                <small style="color: red;">
+                                  Password is required
+                               </small>
+                            } 
+                         </div>
+                         <div class="flex items-center justify-between mt-2 mb-3">
+                            <div class="flex items-center">
+                                <p-checkbox id="rem" binary class="mr-2" formControlName="remember"></p-checkbox>
+                                <label for="rem">Remember me</label>
                             </div>
-                            <p-button label="Login" styleClass="w-full" routerLink="/"></p-button>
+                                <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary">Forgot password?</span>
+                         </div>
+                         <p-button type="submit" label="Login" styleClass="w-full"></p-button>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -62,10 +88,39 @@ import { AppFloatingConfigurator } from '../../layout/component/app.floatingconf
         </div>
     `
 })
-export class Login {
-    email: string = '';
-
-    password: string = '';
-
+export class Login implements OnInit ,OnDestroy {
     checked: boolean = false;
+    subscribe!:Subscription;
+
+   constructor(private shared:SharedService){}
+
+   loginForm =  new FormGroup({
+    email: new FormControl('', [Validators.required,Validators.email]),
+    pass: new FormControl('', [Validators.required]),
+    remember : new FormControl(false)
+   })
+
+   ngOnInit(): void {
+    //this.subscribe = this.shared.sendGetRequest('').subscribe((data:any) => {
+    //  console.log(data);
+    //})
+   }
+
+   getFormData(form:any){
+    if (form?.valid) {
+        let payload = {username: form?.value.email,password: form?.value.pass}
+        console.log("Laod",payload);
+    } else {
+        this.loginForm.markAllAsTouched();
+        this.loginForm.updateValueAndValidity();
+    }
+   }
+
+   ngOnDestroy(): void {
+    //    if(this.subscribe){
+    //     this.subscribe.unsubscribe();
+    //     console.log("Destroyed the Subscriber...");
+    //    }
+   }
+
 }

@@ -33,6 +33,7 @@ import { LayoutService } from '../service/layout.service';
                         />
                     </g>
                 </svg>
+                
                 <!-- <img src="../assets/images/zenmind-logo.png" alt=""> -->
                 <span>Zenmind</span>
             </a>
@@ -40,9 +41,9 @@ import { LayoutService } from '../service/layout.service';
 
         <div class="layout-topbar-actions">
             <div class="layout-config-menu">
-                <button type="button" class="layout-topbar-action" (click)="toggleDarkMode()">
+                <!-- <button type="button" class="layout-topbar-action" (click)="toggleDarkMode()">
                     <i [ngClass]="{ 'pi ': true, 'pi-moon': layoutService.isDarkTheme(), 'pi-sun': !layoutService.isDarkTheme() }"></i>
-                </button>
+                </button> -->
                 <div class="relative">
                     <button
                         class="layout-topbar-action layout-topbar-action-highlight"
