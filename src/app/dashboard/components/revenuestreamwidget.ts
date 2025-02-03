@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { debounceTime, Subscription } from 'rxjs';
-import { LayoutService } from '../../../layout/service/layout.service';
+import { LayoutService } from '../../layout/service/layout.service';
 
 @Component({
     standalone: true,
@@ -20,7 +20,7 @@ export class RevenueStreamWidget {
 
     subscription!: Subscription;
 
-    constructor(public layoutService: LayoutService) {
+    constructor(public layoutService:LayoutService) {
         this.subscription = this.layoutService.configUpdate$.pipe(debounceTime(25)).subscribe(() => {
             this.initChart();
         });
