@@ -4,6 +4,7 @@ import { Dashboard } from './app/dashboard/dashboard';
 import { Notfound } from './app/notfound/notfound';
 import { LoginComponent } from './app/auth/login/login.component';
 import { Access } from './app/auth/access';
+import { AuthGuard } from './app/Shared/Guards/AuthGuard';
 
 export const appRoutes: Routes = [
     {
@@ -11,13 +12,13 @@ export const appRoutes: Routes = [
         component: AppLayout,
         children: [
             { path: '', component: Dashboard },
-            // { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
             { path: 'pages', loadChildren: () => import('./app/pages.routes') },
-        ]
+        ],
+        canActivate:[AuthGuard],
     },
     
     { path: 'notfound', component:Notfound },
     { path: 'login',component:LoginComponent },
-    { path: 'access',component:Access }
-    // { path: '**', redirectTo: '/notfound' }
+    { path: 'access',component:Access },
+    { path: '**', redirectTo: '/notfound' }
 ];

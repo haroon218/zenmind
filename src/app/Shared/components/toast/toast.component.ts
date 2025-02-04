@@ -3,9 +3,11 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { TrigerToastService } from '../../services/triger-toast.service';
 import { ToastObj } from '../../interface/Toast.interface';
+import { BrowserModule } from '@angular/platform-browser';
+import {RippleModule} from 'primeng/ripple';
 @Component({
   selector: 'app-toast',
-  imports: [ToastModule],
+  imports: [RippleModule,ToastModule],
   templateUrl: './toast.component.html',
   styleUrl: './toast.component.scss',
   providers: [MessageService]

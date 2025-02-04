@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StyleClassModule } from 'primeng/styleclass';
 import { AppConfigurator } from './app.configurator';
 import { LayoutService } from '../service/layout.service';
+import { OverlayModule } from 'primeng/overlay';
+import { SharedService } from '../../Shared/services/shared.service';
 
 @Component({
     selector: 'app-topbar',
     standalone: true,
-    imports: [RouterModule, CommonModule, StyleClassModule, AppConfigurator],
+    imports: [RouterModule, CommonModule, StyleClassModule, AppConfigurator,OverlayModule],
     template: ` <div class="layout-topbar">
         <div class="layout-topbar-logo-container">
             <button class="layout-menu-button layout-topbar-action" (click)="layoutService.onMenuToggle()">
@@ -41,9 +43,9 @@ import { LayoutService } from '../service/layout.service';
 
         <div class="layout-topbar-actions">
             <div class="layout-config-menu">
-                <!-- <button type="button" class="layout-topbar-action" (click)="toggleDarkMode()">
+                <button type="button" class="layout-topbar-action" (click)="toggleDarkMode()">
                     <i [ngClass]="{ 'pi ': true, 'pi-moon': layoutService.isDarkTheme(), 'pi-sun': !layoutService.isDarkTheme() }"></i>
-                </button> -->
+                </button>
                 <div class="relative">
                     <button
                         class="layout-topbar-action layout-topbar-action-highlight"
@@ -74,10 +76,15 @@ import { LayoutService } from '../service/layout.service';
                         <i class="pi pi-inbox"></i>
                         <span>Messages</span>
                     </button>
-                    <button type="button" class="layout-topbar-action">
+                    <button type="button" class="layout-topbar-action" (click)="toggle()">
                         <i class="pi pi-user"></i>
                         <span>Profile</span>
                     </button>
+                    <p-overlay [(visible)]="overlayVisible" [responsive]="{ breakpoint: '640px', direction: 'bottom', contentStyleClass: 'h-20rem' }" contentStyleClass="p-3 bg-surface-0 dark:bg-surface-900 shadow rounded-border">
+                    <div class="d-flex cursor-pointer">
+                        <i class="pi pi-sign-out mr-2"></i> <span (click)="logout()">Logout</span>
+                    </div>
+                    </p-overlay>
                 </div>
             </div>
         </div>
@@ -86,9 +93,21 @@ import { LayoutService } from '../service/layout.service';
 export class AppTopbar {
     items!: MenuItem[];
 
-    constructor(public layoutService: LayoutService) {}
+    constructor(public layoutService: LayoutService,private shared:SharedService,private router:Router) {}
 
     toggleDarkMode() {
         this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
     }
+
+    overlayVisible: boolean = false;
+
+    toggle() {
+        this.overlayVisible = !this.overlayVisible;
+    }
+
+    logout(){
+       sessionStorage.clear();
+       this.router.navigate(['/login'])
+    }
+
 }

@@ -42,6 +42,7 @@ export class LoginComponent {
   }
 
   userLogin(formData:FormGroup){
+    this.shared.insertData({key:'user',val:{name:'abc'}})
     this.loading = true;
     let payload = { email : formData.value.email, password : formData.value.pass };
     console.log('paylaod',payload);
@@ -49,7 +50,7 @@ export class LoginComponent {
       this.loading = false;
        if(res?.Success){
         this.router.navigate(['/']);
-        // this.shared.insertData({key:'user',val:res.Data})
+        this.shared.insertData({key:'user',val:res.Data})
         this.TrigerToast.showToast({type:'success',shortMessage:'Success!',detail:res?.Message ? 
         res?.Message : 'Login Successfully!'})
        }else{
