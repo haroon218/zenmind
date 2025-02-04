@@ -10,9 +10,6 @@ export class SharedService {
   sharedData = new BehaviorSubject({});
   constructor(private httpClient:HttpClient) { 
     // console.log(environment.apiUrl);
-    this.insertData({key:'waqas',val:{name:'ali',cls:'S-E',role:'frontend'}});
-    // this.insertData({key:'ali',val:{name:'abcs',cls:'S-E',role:'beckend'}})
-    // console.log(  "Role:=", this.getToken());
   }
 
   private token:string = '';

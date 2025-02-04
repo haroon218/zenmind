@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { AppConfigurator } from './app.configurator';
 import { LayoutService } from '../service/layout.service';
 import { OverlayModule } from 'primeng/overlay';
 import { SharedService } from '../../Shared/services/shared.service';
+import { LoginUser } from '../../Shared/interface/loginUser.interface';
 
 @Component({
     selector: 'app-topbar',
@@ -80,9 +81,15 @@ import { SharedService } from '../../Shared/services/shared.service';
                         <i class="pi pi-user"></i>
                         <span>Profile</span>
                     </button>
-                    <p-overlay [(visible)]="overlayVisible" [responsive]="{ breakpoint: '640px', direction: 'bottom', contentStyleClass: 'h-20rem' }" contentStyleClass="p-3 bg-surface-0 dark:bg-surface-900 shadow rounded-border">
+                    <p-overlay [(visible)]="overlayVisible" [responsive]="{ breakpoint: '640px', direction: 'bottom', contentStyleClass: 'h-20rem' }" contentStyleClass="p-4 bg-surface-0 dark:bg-surface-900 shadow rounded-border">
                     <div class="d-flex cursor-pointer">
-                        <i class="pi pi-sign-out mr-2"></i> <span (click)="logout()">Logout</span>
+                        @if(LoginUserData) {
+                          <span>{{LoginUserData.name}}</span>
+                        }
+                    </div>
+                    <div class="d-flex cursor-pointer mt-2">
+                        <!-- <i class="pi pi-sign-out mr-2"></i>  -->
+                        <span (click)="logout()">Logout</span>
                     </div>
                     </p-overlay>
                 </div>
@@ -90,9 +97,9 @@ import { SharedService } from '../../Shared/services/shared.service';
         </div>
     </div>`
 })
-export class AppTopbar {
+export class AppTopbar implements OnInit{
     items!: MenuItem[];
-
+    LoginUserData!:LoginUser;
     constructor(public layoutService: LayoutService,private shared:SharedService,private router:Router) {}
 
     toggleDarkMode() {
@@ -103,6 +110,12 @@ export class AppTopbar {
 
     toggle() {
         this.overlayVisible = !this.overlayVisible;
+    }
+
+    ngOnInit(): void {
+        this.shared.getData().subscribe((res:any) => {
+           this.LoginUserData = res && res?.user ? res?.user : null;
+        })
     }
 
     logout(){

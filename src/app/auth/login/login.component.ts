@@ -41,30 +41,33 @@ export class LoginComponent {
     }
   }
 
-  userLogin(formData:FormGroup){
-    this.shared.insertData({key:'user',val:{name:'abc'}})
+  userLogin(formData: FormGroup) {
     this.loading = true;
-    let payload = { email : formData.value.email, password : formData.value.pass };
-    console.log('paylaod',payload);
-    this.subscribe = this.shared.sendPostRequest('admin/login',payload).subscribe((res:ApiResponce) => {
-      this.loading = false;
-       if(res?.Success){
-        this.router.navigate(['/']);
-        this.shared.insertData({key:'user',val:res.Data})
-        this.TrigerToast.showToast({type:'success',shortMessage:'Success!',detail:res?.Message ? 
-        res?.Message : 'Login Successfully!'})
-       }else{
-        this.TrigerToast.showToast({type:'error',shortMessage:'Error!', detail: res?.Message ? 
-        res?.Message : 'Something Went Wrong!'})
-        console.log('error',res)
-       }
-    })
+    let payload = { email: formData.value.email,  password: formData.value.pass };
+    this.subscribe = this.shared.sendPostRequest('admin/login', payload).subscribe({
+      next: (res: ApiResponce) => {
+        this.loading = false;
+        if (res?.Success) {
+          this.router.navigate(['/']);
+          this.shared.insertData({ key: 'user', val: res.Data });
+          this.TrigerToast.showToast({ type: 'success', shortMessage: 'Success!',
+          detail: res?.Message ? res?.Message : 'Login Successfully!' });
+        } else {
+          this.TrigerToast.showToast({type: 'error', shortMessage: 'Error!',
+          detail: res?.Message ? res?.Message : 'Something Went Wrong!' });
+          console.log('Error Response:', res);
+        }
+      },
+      error: (error) => {
+        this.loading = false;
+        this.TrigerToast.showToast({type: 'error',shortMessage: 'Error!',detail:'Failed to connect. Please try again'});
+      }
+    });
   }
-
+  
   ngOnDestroy(): void {
     if(this.subscribe){
       this.subscribe.unsubscribe();
-      // console.log("Destroyed the Subscriber...");
-     }
+    }
   }
 }
