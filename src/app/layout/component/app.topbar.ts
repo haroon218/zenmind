@@ -84,12 +84,12 @@ import { LoginUser } from '../../Shared/interface/loginUser.interface';
                     <p-overlay [(visible)]="overlayVisible" [responsive]="{ breakpoint: '640px', direction: 'bottom', contentStyleClass: 'h-20rem' }" contentStyleClass="p-4 bg-surface-0 dark:bg-surface-900 shadow rounded-border">
                     <div class="d-flex cursor-pointer">
                         @if(LoginUserData) {
-                          <span>{{LoginUserData.name}}</span>
+                          <span class="text-sm text-muted-color font-semibold">{{LoginUserData.name}}</span>
                         }
                     </div>
                     <div class="d-flex cursor-pointer mt-2">
                         <!-- <i class="pi pi-sign-out mr-2"></i>  -->
-                        <span (click)="logout()">Logout</span>
+                        <span class="text-sm text-muted-color font-semibold" (click)="logout()">Logout</span>
                     </div>
                     </p-overlay>
                 </div>

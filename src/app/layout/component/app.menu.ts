@@ -30,8 +30,8 @@ export class AppMenu {
                 items: [
                     { label: 'Comp 1', icon: 'pi pi-fw pi-id-card'},
                     { label: 'Comp 2', icon: 'pi pi-fw pi-check-square' },
-                    { label: 'Comp 3', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon'},
-                    { label: 'Comp 4', icon: 'pi pi-fw pi-table'},
+                    // { label: 'Comp 3', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon'},
+                    // { label: 'Comp 4', icon: 'pi pi-fw pi-table'},
              ]
             },
 
@@ -41,63 +41,73 @@ export class AppMenu {
                 routerLink: ['/pages'],
                 items: [
                     {
-                        label: 'Auth',
-                        icon: 'pi pi-fw pi-user',
+                        label: 'Users',
+                        icon: 'pi pi-users',
                         items: [
                             {
-                                label: 'Login',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/login']
+                                label: 'User',
+                                icon: 'pi pi-fw pi-user',
+                                routerLink: ['/user/crud']
+                            },
+                            // {
+                            //     label: 'Access Denied',
+                            //     icon: 'pi pi-fw pi-lock',
+                            //     routerLink: ['/access']
+                            // },
+                            {
+                                label: 'Roles',
+                                icon: 'pi pi-shield',
+                                routerLink: ['/user/role']
                             },
                             {
-                                label: 'Access Denied',
+                                label: 'Permission',
                                 icon: 'pi pi-fw pi-lock',
-                                routerLink: ['/access']
+                                routerLink: ['/user/permission']
                             }
                         ]
                     },
-                    {
-                        label: 'Crud',
-                        icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
-                    },
+                    // {
+                    //     label: 'Crud',
+                    //     icon: 'pi pi-fw pi-pencil',
+                    //     routerLink: ['/pages/crud']
+                    // },
                     {
                         label: 'Not Found',
                         icon: 'pi pi-fw pi-exclamation-circle',
-                        routerLink: ['/pages/notfound']
+                        routerLink: ['/user/notfound']
                     },
                     {
                         label: 'Empty',
                         icon: 'pi pi-fw pi-circle-off',
-                        routerLink: ['/pages/empty']
+                        routerLink: ['/user/empty']
                     }
                 ]
             },
 
-            {
-                label: 'Heading',
-                items: [
-                    {
-                        label: 'Submenu 1',
-                        icon: 'pi pi-fw pi-bookmark',
-                        items: [
-                            {
-                                label: 'Submenu 1.1',
-                                icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
-                            {
-                                label: 'Submenu 1.2',
-                                icon: 'pi pi-fw pi-bookmark',
-                                items: [{ label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' }]
-                            }
-                        ]
-                    },
-                ]
-            },
+            // {
+            //     label: 'Heading',
+            //     items: [
+            //         {
+            //             label: 'Submenu 1',
+            //             icon: 'pi pi-fw pi-bookmark',
+            //             items: [
+            //                 {
+            //                     label: 'Submenu 1.1',
+            //                     icon: 'pi pi-fw pi-bookmark',
+            //                     items: [
+            //                         { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark' },
+            //                         { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
+            //                     ]
+            //                 },
+            //                 {
+            //                     label: 'Submenu 1.2',
+            //                     icon: 'pi pi-fw pi-bookmark',
+            //                     items: [{ label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' }]
+            //                 }
+            //             ]
+            //         },
+            //     ]
+            // },
 
             {
                 label: 'More',

@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
         component: AppLayout,
         children: [
             { path: '', component: Dashboard },
-            { path: 'pages', loadChildren: () => import('./app/pages.routes') },
+            { path: 'user', loadChildren: () => import('./app/pages.routes') },
         ],
         canActivate:[AuthGuard],
     },
