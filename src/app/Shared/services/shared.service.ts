@@ -9,7 +9,6 @@ import { environment } from '../../../environments/environments';
 export class SharedService {
   sharedData = new BehaviorSubject({});
   constructor(private httpClient:HttpClient) { 
-    // console.log(environment.apiUrl);
   }
 
   private token:string = '';
@@ -19,7 +18,6 @@ export class SharedService {
       sessionStorage.getItem(`sharedData@${environment.appName}`) || '{}'
     );
     if (localStorageData && localStorageData) {
-      // console.log(localStorageData);
       return localStorageData.waqas.role ?? null;
     }
     return null;

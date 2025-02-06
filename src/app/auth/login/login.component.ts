@@ -55,7 +55,6 @@ export class LoginComponent {
         } else {
           this.TrigerToast.showToast({type: 'error', shortMessage: 'Error!',
           detail: res?.Message ? res?.Message : 'Something Went Wrong!' });
-          console.log('Error Response:', res);
         }
       },
       error: (error) => {

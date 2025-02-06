@@ -69,9 +69,7 @@ export class RoleComponent implements OnInit{
   ngOnInit(): void {}
 
   addRole(form:FormGroup){
-    console.log(form);
     if (form.valid) {
-      console.log(form.value);
       this.addRoleDialog = false;
       this.dataAry.push({
         id: this.dataAry.length + 1,
@@ -113,12 +111,10 @@ export class RoleComponent implements OnInit{
   editProduct(data:any){
     this.updateItemData = data;
     this.is_update = true
-    console.log(data);
     this.addRoleForm.get('roleName')?.setValue(data?.role);
     this.addRoleDialog  = true
   }
   deleteProduct(data:any){
-    console.log(data);
     this.deleteItem = data;
   }
   saveProduct(){}
