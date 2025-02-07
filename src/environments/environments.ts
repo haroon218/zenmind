@@ -1,5 +1,5 @@
 export const environment = {
-    appName:"Zenmind",
+    appName:"Salvao",
     production: false,
     apiUrl: 'https://zenmindapi-dev.cherryberrycloud.com/api/',
 }

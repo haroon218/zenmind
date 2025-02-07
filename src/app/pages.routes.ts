@@ -3,9 +3,11 @@ import { Crud } from './crud/crud';
 import { Empty } from './empty/empty';
 import { RoleComponent } from './user/role/role.component';
 import { PermissionComponent } from './user/permission/permission.component';
+import { UsersComponent } from './user/users/users.component';
 
 export default [
     { path: 'crud', component: Crud },
+    // { path: 'crud', component: UsersComponent },
     { path: 'empty', component: Empty },
     { path: 'role', component: RoleComponent },
     { path: 'permission', component: PermissionComponent },

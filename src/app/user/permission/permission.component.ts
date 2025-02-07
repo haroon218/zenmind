@@ -11,15 +11,16 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 @Component({
   selector: 'app-permission',
-  imports: [ToolbarModule,
-      ButtonModule, 
-      CommonModule,
-      TableModule,
-      InputIconModule,  
-      IconFieldModule,   
-      InputTextModule, 
-      DialogModule,
-      ReactiveFormsModule],
+  imports: [
+    ToolbarModule,
+    ButtonModule, 
+    CommonModule,
+    TableModule,
+    InputIconModule,  
+    IconFieldModule,   
+    InputTextModule, 
+    DialogModule,
+    ReactiveFormsModule],
   templateUrl: './permission.component.html',
   styleUrl: './permission.component.scss'
 })
@@ -72,7 +73,7 @@ export class PermissionComponent {
         this.addRoleDialog = false;
         this.dataAry.push({
           id: this.dataAry.length + 1,
-          role: form?.value?.roleName,
+          role: this.captalizeStr(form?.value?.roleName),
           create_at: new Date()
         })
         this.addRoleForm.reset()
@@ -83,11 +84,10 @@ export class PermissionComponent {
     }
   
     updateRole(form:FormGroup){
-      // debugger;
       if (form.valid) {
         let load = {
           id: this.updateItemData?.id,
-          role: form?.value?.roleName,
+          role: this.captalizeStr(form?.value?.roleName),
           create_at: new Date()
         }
         this.dataAry.filter( (data:any,ind:any) =>{
@@ -122,5 +122,16 @@ export class PermissionComponent {
       this.dataAry = this.dataAry.filter((item:any) => item.id !==  this.deleteItem?.id);
       this.deleteDialog = false;
     }
-  
+
+//-----------------------First Letter of a String Uppercase---------------
+  FLS_Uppercase(str:string){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+//------------------------First Letter of all String Character Uppercase----------------
+ captalizeStr(str:string){
+  if (typeof str !== 'string' || !str.trim()) return ''; // Validate input
+  return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+
 }

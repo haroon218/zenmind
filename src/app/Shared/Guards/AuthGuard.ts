@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate{
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-      let userData = sessionStorage.getItem('sharedData@Zenmind') || null;
+      let userData = sessionStorage.getItem('sharedData@Salvao') || null;
       if(userData){
         // this.router.navigate(['/']);
         return true;

@@ -8,6 +8,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
+import { Role } from '../../Shared/interface/Role.interface';
 
 @Component({
   selector: 'app-role',
@@ -31,6 +32,7 @@ export class RoleComponent implements OnInit{
   is_update:boolean = false;
   updateItemData:any;
   deleteItem:any;
+  RoleAry!:Role[]
 
   dataAry:any = [  
     {
@@ -73,7 +75,7 @@ export class RoleComponent implements OnInit{
       this.addRoleDialog = false;
       this.dataAry.push({
         id: this.dataAry.length + 1,
-        role: form?.value?.roleName,
+        role: this.captalizeStr(form?.value?.roleName),
         create_at: new Date()
       })
       this.addRoleForm.reset()
@@ -88,7 +90,7 @@ export class RoleComponent implements OnInit{
     if (form.valid) {
       let load = {
         id: this.updateItemData?.id,
-        role: form?.value?.roleName,
+        role: this.captalizeStr(form?.value?.roleName),
         create_at: new Date()
       }
       this.dataAry.filter( (data:any,ind:any) =>{
@@ -124,5 +126,11 @@ export class RoleComponent implements OnInit{
     this.deleteDialog = false;
   }
 
- 
+  //------------------------First Letter of all String Character Uppercase----------------
+ captalizeStr(str:string){
+   if (typeof str !== 'string' || !str.trim()) return ''; // Validate input
+   return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+
+
 }

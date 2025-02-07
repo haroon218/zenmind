@@ -38,7 +38,7 @@ import { LoginUser } from '../../Shared/interface/loginUser.interface';
                 </svg>
                 
                 <!-- <img src="../assets/images/zenmind-logo.png" alt=""> -->
-                <span>Zenmind</span>
+                <span>Salvao</span>
             </a>
         </div>
 

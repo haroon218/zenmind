@@ -10,7 +10,7 @@
     
 </p-toolbar>
  <!-- Role Table -->
- <p-table
+<p-table
  #dt
  [value]="dataAry"
  [rows]="5"
@@ -18,13 +18,11 @@
  [paginator]="true"
  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
  [tableStyle]="{ 'min-width': '75rem' }"
- [(selection)]="selectedProducts"
  [rowHover]="true"
  dataKey="id"
  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
  [showCurrentPageReport]="true"
- [rowsPerPageOptions]="[10, 20, 30]"
->
+ [rowsPerPageOptions]="[5, 10, 20]">
  <ng-template #caption>
      <div class="flex items-center justify-between">
          <h5 class="m-0">Manage Permission</h5>
@@ -36,9 +34,9 @@
  </ng-template>
  <ng-template #header>
      <tr>
-         <th style="width: 3rem"> # </th>
-         <th style="min-width:16rem"> Permission </th>
-         <th style="min-width:16rem"> Create at</th>
+         <th style="width: 3rem">#</th>
+         <th style="min-width:16rem">Permission</th>
+         <th style="min-width:16rem">Create at</th>
          <th style="min-width: 12rem">Action</th>
      </tr>
  </ng-template>
@@ -60,7 +58,7 @@
  <!-- Role Table -->
 
  <!-- Add Role Popup  -->
- <p-dialog [(visible)]="addRoleDialog" [style]="{ width: '450px' }" header="Add Permission" [modal]="true"
+<p-dialog [(visible)]="addRoleDialog" [style]="{ width: '450px' }" header="Add Permission" [modal]="true"
  [draggable]="false">
    <form [formGroup]="addRoleForm">
      <div class="flex flex-col gap-1">
@@ -77,9 +75,9 @@
      </div>
 
     </form> 
- </p-dialog>
+</p-dialog>
 
- <p-dialog [(visible)]="deleteDialog" [style]="{ width: '450px' }" header="Delete Role" [modal]="true"
+<p-dialog [(visible)]="deleteDialog" [style]="{ width: '450px' }" header="Delete Role" [modal]="true"
  [draggable]="false">
      <ng-template #content>
          <div class="flex">
@@ -92,4 +90,4 @@
         <p-button label="No"  (click)="deleteDialog = false" />
         <p-button label="Yes"  (click)="removeRole()" />
     </ng-template>
- </p-dialog>
+</p-dialog>
