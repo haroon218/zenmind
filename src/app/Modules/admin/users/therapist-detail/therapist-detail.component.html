@@ -1,0 +1,71 @@
+<!-- user-detail.component.html -->
+<p-toolbar styleClass="mb-6">
+  <ng-template #start>
+    <p-button label="Documents" severity="secondary" class="mr-2" />
+  </ng-template>
+</p-toolbar>
+
+<div class="user-detail-container">
+  <!-- Loop through each document/user detail -->
+   @for (detail of details; track $index) {
+  <div  class="mb-6">
+    <p-card [header]="detail.header" class="user-detail-card">
+      <div class="user-detail-grid">
+        <!-- Document/Image Section -->
+        <div class="document-section">
+          <p-image
+            [src]="detail.imageUrl"
+            width="100%"
+            [preview]="true"
+            class="document-image"
+          ></p-image>
+        </div>
+
+        <!-- Details Section -->
+        <div class="details-section">
+          <h3>Document Information</h3>
+          <p><strong>User Name:</strong> {{ detail.name }}</p>
+          <p><strong>Email:</strong> {{ detail.email }}</p>
+          <!-- <p><strong>Role:</strong> {{ detail.role }}</p> -->
+          <p><strong>Description:</strong> {{ detail.description }}</p>
+
+          <!-- Dropdown for Status -->
+          <div class="dropdown-button-group">
+            <p-dropdown
+              [options]="statusOptions"
+              [(ngModel)]="detail.selectedStatus"
+              (onChange)="onStatusChange(detail)"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select Status"
+              class="status-dropdown"
+            ></p-dropdown>
+          
+            <!-- Buttons -->
+            <div class="button-group">
+              
+              <p-button
+                label="Download"
+                icon="pi pi-download"
+                (click)="downloadDocument(detail.imageUrl, detail.name)"                class="download-button"
+              ></p-button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </p-card>
+  </div>
+}
+</div>
+<p-dialog [(visible)]="showDialog" [modal]="true" [closable]="false" header="Reason for Rejection" [style]="{width:'400px'}">
+  <div>
+    <p>Enter the reason for rejection:</p>
+    <textarea [(ngModel)]="rejectionReason" rows="8" class="p-inputtext p-component w-full" style="border: 1px solid rgb(175, 173, 173);padding: 4px;"></textarea>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button label="Submit" icon="pi pi-check" (click)="submitReason()"></p-button>
+    <p-button label="Cancel" icon="pi pi-times" (click)="cancelReason()" severity="secondary"></p-button>
+  </ng-template>
+</p-dialog>

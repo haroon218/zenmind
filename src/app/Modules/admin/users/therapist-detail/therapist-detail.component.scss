@@ -1,0 +1,112 @@
+// user-detail.component.scss
+::ng-deep .user-detail-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); 
+  gap: 2rem;
+  justify-content: center;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+::ng-deep .dropdown-button-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem; // Adds spacing between dropdown and button
+  flex-wrap: wrap; // Ensures responsiveness
+
+  .status-dropdown {
+    flex: 1; // Allows the dropdown to take available space
+    min-width: 200px; // Ensures it does not shrink too much
+  }
+
+  .button-group {
+    display: flex;
+    gap: 0.5rem; // Adjust space between buttons
+  }
+}
+
+::ng-deep .user-detail-card {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+::ng-deep .user-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 1.5rem;
+  padding: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+  
+  ::ng-deep.document-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    .document-image {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+  
+      
+    }
+  }
+  
+  ::ng-deep.details-section {
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+    }
+  
+    p {
+      font-size: 1rem;
+      color: #4a5568;
+      margin-bottom: 1rem;
+  
+      strong {
+        color: #2c3e50;
+      }
+    }
+  
+  
+  
+    // .button-group {
+    //   display: flex;
+    //   gap: 1rem;
+    //   margin-top: 2rem;
+  
+      // .download-button,
+      
+      // .cancel-button {
+      //   flex: 1;
+      //   padding: 0.75rem;
+      //   font-size: 0.9rem;
+      //   font-weight: 500;
+      //   border-radius: 6px;
+      //   transition: all 0.3s ease;
+  
+      //   &:hover {
+      //     transform: translateY(-2px);
+      //     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      //   }
+  
+      //   &:active {
+      //     transform: translateY(0);
+      //     box-shadow: none;
+      //   }
+      // }
+  
+     
+  
+      
+    // }
+  }
