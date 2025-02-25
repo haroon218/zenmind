@@ -104,7 +104,7 @@ export class TherapistDetailComponent {
       .catch(error => console.error('Error downloading image:', error));
   }  
   onStatusChange(detail: any) {
-    debugger
+    
     if (detail.selectedStatus == 'reject') {
       this.selectedDetail = detail;
       this.showDialog = true;

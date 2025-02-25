@@ -52,7 +52,7 @@ export class LoginComponent {
     });
   }
   userLogin() {
-    debugger
+    
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;

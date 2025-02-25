@@ -16,6 +16,7 @@ import { SharedService } from '../../Shared/services/shared.service';
             <button class="layout-menu-button layout-topbar-action" (click)="layoutService.onMenuToggle()">
                 <i class="pi pi-bars"></i>
             </button>
+            
             <a class="layout-topbar-logo" routerLink="/">
                 <img src="/assets/images/zenmind-logo.png" alt="Logo" loading="lazy" style="max-height: 30px;">
                 
@@ -96,7 +97,7 @@ export class AppTopbar implements OnInit{
 
     ngOnInit(): void {
         this.sharedService.sharedData$.subscribe((res:any) => {
-            debugger
+            
            this.LoginUserData = res ;
         })
     }

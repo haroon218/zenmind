@@ -87,7 +87,7 @@ export class RolesComponent {
 let user:any=localStorage.getItem('user');
     this.rolesService.getRole().subscribe({
       next:(respose:any)=>{
-        debugger
+        
         if(respose&&respose.Success){
           this.allRoles=respose.Data;
           this.loading=false;
@@ -104,7 +104,7 @@ let user:any=localStorage.getItem('user');
     if (this.addRoleForm.valid) {
       this.rolesService.addRole(this.addRoleForm.value).subscribe({
         next:(respose:any)=>{
-          debugger
+          
           if(respose&&respose.Success){
             this.toastrService.showToast({
               type: 'success',
@@ -135,7 +135,7 @@ let user:any=localStorage.getItem('user');
     if (this.addRoleForm.valid) {
       this.rolesService.updateRole(this.updateItemData.id,this.addRoleForm.value).subscribe({
         next:(respose:any)=>{
-          debugger
+          
           if(respose&&respose.Success){
             this.addRoleDialog=false;
             this.toastrService.showToast({
@@ -185,7 +185,7 @@ let user:any=localStorage.getItem('user');
   removeRole(){
     this.rolesService.deleterole(this.deleteItem.id).subscribe({
       next:(respose:any)=>{
-        debugger
+        
         if(respose&&respose.Success){
           this.deleteDialog=false;
           this.toastrService.showToast({

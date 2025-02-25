@@ -53,7 +53,7 @@ loading:boolean=false;
   
       this.permissionService.getPermissions().subscribe({
         next:(respose:any)=>{
-          debugger
+          
           if(respose&&respose.Success){
             this.allPermissions=respose.Data;
             this.loading=false;
@@ -70,7 +70,7 @@ loading:boolean=false;
       if (this.addPermissionForm.valid) {
         this.permissionService.addPermission(this.addPermissionForm.value).subscribe({
           next:(respose:any)=>{
-            debugger
+            
             if(respose&&respose.Success){
               this.toastrService.showToast({
                 type: 'success',
@@ -102,7 +102,7 @@ loading:boolean=false;
       if (this.addPermissionForm.valid) {
         this.permissionService.updatPermission(this.updateItemData.id,this.addPermissionForm.value).subscribe({
           next:(respose:any)=>{
-            debugger
+            
             if(respose&&respose.Success){
               this.addRoleDialog=false;
               this.is_update=false;
@@ -152,7 +152,7 @@ loading:boolean=false;
     removeRole(){
       this.permissionService.deletePermission(this.deleteItem.id).subscribe({
         next:(respose:any)=>{
-          debugger
+          
           if(respose&&respose.Success){
             this.deleteDialog=false;
             this.toastrService.showToast({
