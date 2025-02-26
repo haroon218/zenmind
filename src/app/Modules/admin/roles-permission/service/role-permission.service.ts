@@ -10,16 +10,16 @@ export class RolePermissionService {
 
  private http = inject(HttpClient);
   public getRole(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/admin/roles`)
+    return this.http.get<any>(`${environment.apiUrl}/admin/role/get-all`)
   }
   public addRole(payLoad: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/admin/addEditRole`, payLoad)
+    return this.http.post<any>(`${environment.apiUrl}/admin/role/add-edit`, payLoad)
   }
   public deleterole(role_id: any): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/admin/role/${role_id}`)
   }
-  public updateRole(role_id: any, data: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/admin/role/${role_id}`, data);
+  public updateRole( data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/admin/role/add-edit`, data);
   }
   
   public getPermissions(): Observable<any> {

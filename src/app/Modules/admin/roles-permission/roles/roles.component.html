@@ -21,7 +21,7 @@
  [tableStyle]="{ 'min-width': '75rem' }"
  [rowHover]="true"
  dataKey="id"
- currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Roles"
  [showCurrentPageReport]="true"
  [rowsPerPageOptions]="[5, 10, 20]"
 >
@@ -38,7 +38,7 @@
      <tr>
         <th style="width: 3rem"> # </th>
         <th style="min-width:16rem"> Role</th>
-        <th style="min-width:16rem"> Create at</th>
+        <th style="min-width:16rem"> Created at</th>
         <th style="min-width: 12rem">Action</th>
      </tr>
  </ng-template>
@@ -84,7 +84,7 @@
      <ng-template #content>
          <div class="flex">
             <i class="pi pi-exclamation-triangle" style="font-size: 15px;"></i>
-            <span class="ml-2"> Are you sure you want to delete?</span>
+            <span class="ml-2"> Are you sure you want to delete <strong>( {{this.deleteItem.name}} )</strong>?</span>
         </div>
      </ng-template>
 

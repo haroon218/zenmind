@@ -133,7 +133,11 @@ let user:any=localStorage.getItem('user');
 
   updateRole(){
     if (this.addRoleForm.valid) {
-      this.rolesService.updateRole(this.updateItemData.id,this.addRoleForm.value).subscribe({
+      let payload={
+        name:this.addRoleForm.value.name,
+        role_id:this.updateItemData.id
+      }
+      this.rolesService.updateRole(payload).subscribe({
         next:(respose:any)=>{
           
           if(respose&&respose.Success){
@@ -180,7 +184,6 @@ let user:any=localStorage.getItem('user');
   deleteRole(data:any){
     this.deleteItem = data;
   }
-  saveProduct(){}
 
   removeRole(){
     this.rolesService.deleterole(this.deleteItem.id).subscribe({
