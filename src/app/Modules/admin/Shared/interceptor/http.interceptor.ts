@@ -6,7 +6,7 @@ import { TrigerToastService } from '../services/triger-toast.service';
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const toastService = inject(TrigerToastService); // Inject the ToastService
   
-  const token: any = JSON.parse(localStorage.getItem('Data@Salvao') || 'null')?.token;
+  const token: any = JSON.parse(sessionStorage.getItem('Data@Salvao') || 'null')?.token;
 
   // Clone the request and add the Authorization header
   const authReq = token

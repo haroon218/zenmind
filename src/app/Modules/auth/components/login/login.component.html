@@ -6,7 +6,7 @@
                 <div class="text-center mb-8">
                     <!-- Centering the image -->
                     <div class="flex justify-center mb-4">
-                        <img src="/assets/images/zenmind-logo.png" alt="Logo" loading="lazy" style="max-height: 100px;">
+                        <img src="/assets/images/zenmind-logo.png" alt="Logo" loading="eager" style="max-height: 100px;">
                     </div>
                     <h1 class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">Welcome to Salvao!</h1>
                     <p class="text-muted-color font-medium">Login in to continue</p>
@@ -27,7 +27,7 @@
                         <div class="flex mt-2" style="flex-direction: column;">
                             <label for="pass" class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2">Password</label>
                             <p-password id="pass" formControlName="password" placeholder="Enter Password" [toggleMask]="true" styleClass="mb-1" [fluid]="true" [feedback]="false"></p-password>
-                            @if (loginForm.get('pass')?.touched && loginForm.get('pass')?.hasError('required')) {
+                            @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
                                 <small style="color: red;"> Password is required </small>
                             }
                         </div>

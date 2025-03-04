@@ -57,17 +57,15 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
-  
+  else{
     this.loading = true;
     this.authService.Login(this.loginForm.value).subscribe({
       next: (response: any) => {
         this.loading = false;
         if (response?.Success) {
-          localStorage.setItem('Data@Salvao', JSON.stringify(response.Data));
-          
+          sessionStorage.setItem('Data@Salvao', JSON.stringify(response.Data));   
           // **Update BehaviorSubject with new user data**
-          this.sharedservice.sharedData.next(response.Data); 
-          
+          this.sharedservice.sharedData.next(response.Data);          
           this.router.navigate(['/admin']);
           this.toastService.showToast({
             type: 'success',
@@ -86,6 +84,8 @@ export class LoginComponent {
         this.loading = false;
       }
     });
+  }
+   
   }
   
   

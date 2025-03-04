@@ -12,7 +12,7 @@ export class SharedService {
     this.getData()
   }
   public getData() {
-    let storedData = localStorage.getItem('Data@Salvao');
+    let storedData = sessionStorage.getItem('Data@Salvao');
     this.sharedData.next(JSON.parse(storedData || '{}'));
   }
 }

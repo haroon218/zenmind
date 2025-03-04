@@ -103,7 +103,7 @@ export class AppTopbar implements OnInit{
     }
 
     logout(){
-        localStorage.removeItem("Data@Salvao");
+        sessionStorage.removeItem("Data@Salvao");
        this.router.navigate(['/login'])
     }
 
