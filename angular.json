@@ -31,30 +31,49 @@
                         ],
                         "styles": [
                             "src/styles.scss"
-                            
                         ],
                         "scripts": []
                     },
                     "configurations": {
                         "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environments.dev.ts",
+                                    "with": "src/environments/environments.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "10mb",
-                                    "maximumError": "10mb"
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "10mb",
-                                    "maximumError": "10mb"
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
                                 }
-                            ],
-                            "outputHashing": "all"
+                            ]
                         },
                         "development": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environments.ts",
+                                    "with": "src/environments/environments.dev.ts"
+                                }
+                            ],
                             "optimization": false,
-                            "extractLicenses": false,
-                            "sourceMap": true
+                            "outputHashing": "none",
+                            "sourceMap": true,
+                            "namedChunks": true,
+                            "aot": true,
+                            "extractLicenses": false
                         }
                     },
                     "defaultConfiguration": "production"

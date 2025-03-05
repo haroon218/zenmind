@@ -20,7 +20,7 @@ import { LayoutService } from '../service/layout.service';
             </div>
             <app-footer></app-footer>
         </div>
-        <div class="layout-mask animate-fadein"></div>
+        <!-- <div class="layout-mask animate-fadein"></div> -->
     </div> `
 })
 export class AppLayout {

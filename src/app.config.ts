@@ -8,6 +8,7 @@ import { appRoutes } from './app.routes';
 import { httpInterceptor } from './app/Modules/admin/Shared/interceptor/http.interceptor';
 
 export const appConfig: ApplicationConfig = {
+    // these are  the providers to run the app
     providers: [
         provideRouter(appRoutes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }), withEnabledBlockingInitialNavigation()),
         provideHttpClient(withInterceptors([httpInterceptor])),

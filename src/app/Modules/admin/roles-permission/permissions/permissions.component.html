@@ -1,21 +1,12 @@
 <p-toolbar styleClass="mb-6">
     <ng-template #start>
-        <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
-        <!-- <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length" /> -->
-
-      </ng-template>
-    <!-- <ng-template #end>
-        <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
-    </ng-template> -->
-    
+        <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNewPermissionDialog()" />
+      </ng-template>   
 </p-toolbar>
- <!-- Role Table -->
-<p-table
+<p-table 
  #dt
- [value]="allPermissions"
- [rows]="5"
- [columns]="[]"
- [paginator]="true"
+ [value]="permissionsData"
+ [rows]="10" [paginator]="true" 
  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
  [tableStyle]="{ 'min-width': '75rem' }"
  [rowHover]="true"
@@ -24,7 +15,7 @@
     scrollHeight="50vh"
  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Permissions"
  [showCurrentPageReport]="true"
- [rowsPerPageOptions]="[5, 10, 20]">
+ [rowsPerPageOptions]="[10,20,30]">
  <ng-template #caption>
      <div class="flex items-center justify-between">
          <h5 class="m-0">Manage Permission</h5>
@@ -36,7 +27,7 @@
  </ng-template>
  <ng-template #header>
      <tr>
-         <th style="width: 3rem">#</th>
+         <th >#</th>
          <th style="min-width:16rem">Name</th>
          <th style="min-width:16rem">Created at</th>
          <th style="min-width: 12rem">Action</th>
@@ -51,16 +42,33 @@
          <td style="min-width: 16rem">{{ permission.create_at | date : 'short' }}</td>         
          <td>
              <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" 
-             (click)="editProduct(permission)"/>
-             <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deletePermission(permission);deleteDialog = true" />
+             (click)="editPermissionDialog(permission)"/>
+             <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deletePermissionDialog(permission);deleteDialog = true" />
          </td>
      </tr>
  </ng-template>
+ <ng-template pTemplate="emptymessage">
+    <tr>
+        <td colspan="6">
+            <div
+                style="
+                margin-top: 20px;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    flex-direction: column;
+                    color: #888;
+                "
+            >
+                <i class="pi pi-exclamation-circle" style="font-size: 2rem; color:red;"></i>
+                <div style="margin-top: 1rem;">No Permissions Added Yet</div>
+            </div>  
+        </td>
+    </tr>
+</ng-template>
 </p-table>
- <!-- Role Table -->
-
- <!-- Add Role Popup  -->
-<p-dialog [(visible)]="addRoleDialog" [style]="{ width: '450px' }" [header]="is_update?'Update Permission':'Add Permission'" [modal]="true"
+<p-dialog [(visible)]="addPermissionDialog" [style]="{ width: '450px' }" [header]="is_update?'Update Permission':'Add Permission'" [modal]="true"
  [draggable]="false">
    <form [formGroup]="addPermissionForm">
      <div class="flex flex-col gap-1">
@@ -71,9 +79,9 @@
             }
      </div>
 
-     <div class="flex justify-end mt-3 gap-1" *ngIf="addRoleDialog">
+     <div class="flex justify-end mt-3 gap-1" *ngIf="addPermissionDialog">
          <p-button label="Cancel" icon="pi pi-times" text (click)="closeDialog();addPermissionForm.reset()" />
-         <p-button [label]="is_update?'Update':'Add'" icon="pi pi-check" (click)="is_update ? updatePermission():addPermission()" />
+         <p-button type="submit" [label]="loading ? '' : (is_update ? 'Update' : 'Add')" [loading]="loading" [disabled]="loading" icon="pi pi-check" (click)="is_update ? updatePermission():addPermission()"  styleClass="custom-login-button" />
      </div>
 
     </form> 
@@ -84,12 +92,12 @@
      <ng-template #content>
          <div class="flex">
             <i class="pi pi-exclamation-triangle" style="font-size: 15px;"></i>
-            <span class="ml-2"> Are you sure you want to delete?</span>
+            <span class="ml-2"> Are you sure you want to delete <strong>( {{this.deleteItem.name}} )</strong>?</span>
         </div>
      </ng-template>
 
      <ng-template #footer>
         <p-button label="No"  (click)="deleteDialog = false" />
-        <p-button label="Yes"  (click)="removeRole()" />
+        <p-button [label]="loading ?'':'yes'" [loading]="loading" [disabled]="loading" (click)="deletePermission()" />
     </ng-template>
 </p-dialog>
